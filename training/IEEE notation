@@ -1,0 +1,8 @@
+IEEE (754 fp 32 single precision) is a notation that is usually accpeted as the standard way to represnt floating point numbers (doubles or longs).
+
+Within this includes a few key components. To start is the scientific notation that was briefly refrenced last session. This was the idea that all numbers should be 
+normalized and as such "1. *******" (* representing further binary numbers). With this, the 1 does not take up a bit but is instead assumed.
+
+Sign: one bit is required to represent the sign of the floating point number - as such 0 represents positive and 1 represents a negative number.
+
+Mantissa - this is the decimal points assigned
