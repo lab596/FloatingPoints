@@ -6,3 +6,36 @@ normalized and as such "1. *******" (* representing further binary numbers). Wit
 Sign: one bit is required to represent the sign of the floating point number - as such 0 represents positive and 1 represents a negative number.
 
 Mantissa - this is the decimal points assigned
+
+
+
+
+
+
+
+Raw Notes ###########
+IEEE:
+
+Mantissa - 52 bits for the number
+Sign - 1 bit either 0 for positive or 1 for negative
+Exponent - 11 bits can represent numbers up to 2048 but is split between negative and positive to represent both exponent sides - must add 1023 to exponent to see what number is actually represented 
+-exponent 2047 is infinite or if mantissa all zeros not a number 
+Exponent as zero is a very small number 
+
+Rounding happens in the matissa 
+
+Machine epsilon is the distance between 1 and the next smallest representable number 
+
+https://www.youtube.com/watch?v=wbxSTxhTmrs
+
+
+ulps - error from actual - just subtract what is given from actual 
+
+Guard Bits - adds significant figures in order to represent more accurate data - 
+For example is subtraction in which numbers will be lost to truncation - guard bits can be used instead to preserve significant figures - these then can be used to modify result to be more accurate 
+
+Catastrophic Cancellation vs Benign Cancellation
+Catastrophic - is rounding during the the problem in earlier steps which results in a magnified error in the later steps of the calculation
+
+Benign - no rounding whatsoever during the calculation but a rounding at the end to preserve significant digits 
+
