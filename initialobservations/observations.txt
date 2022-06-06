@@ -1,0 +1,32 @@
+Just by comparing these two very basic tests it is extrememly concerning to see the variety in outputs.
+Experiment:
+The goal was to input some basic fractions and commit different operations to see the answers provided. Just out of curiosity I performed this test in two different 
+languages java and python.
+
+Fraction 1 = 5/2
+Fraction 2 = 7/2
+5/2 + 7/2 = 12/2 ~ 6
+5/2 - 7/2 = -2/2 ~ -1
+5/2 * 7/2 = 35/4 ~ 8.5
+5/2 / 7/2 = 5/7 ~ 0.714285 (repeating)
+
+Results:
+Due to javas in built truncation the results provided by most of these operations were off. This is deifinately a problem as these basic arithmetic operations are often 
+times critical in a problem and error margins such as these can play a drastic role later in larger implemented projects. 
+I believe such a large margin occured due to javas operating system which prefers to immediatly change the inputs given to a decimal and further commit the operations.
+This results in underestimates accross all calculations due to a lack of accuracy at the very start of the program 
+
+Something a bit different can be seen by pythons results. The results were accurate despite being in decimal rather than fraction (which is the most accurate answer).
+There is two reasons for this diffrence.
+Either python prefers to do its calucations in fraction then later change it when it comes to the result. 
+Or rather (what I think is the better explination) python uses more sugnificant figures when it comes to rounding numbers off.
+This would obviously result in more accurate calculations and would also explain the answers provided. 
+The reason I lean toward this explination is if python is trying to be as accurate as possible and doing calculations in fractions why are they providing a 
+fraction answer?
+Either way the rounding is definatlyy concerning either way you put it. 
+For example on the division pythin produced an answer to a certain degree and this would definately go on to create issues in further calculations if that number is used.
+
+Conclusion:
+The lack in pure accuracy despite diffrent in both languages pose a threat to the idea of arithmitic in coding as we know it. 
+Such margins of error can easily be magnified and cause problems in esssential project.
+Goal: This idea clearly needs to be further researched and understood in order to fix this error.
