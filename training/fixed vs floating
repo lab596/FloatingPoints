@@ -1,0 +1,34 @@
+Lets look at a fundamental diffrence that is neccesary to understand in order to fully comprehend floating point number. That is the idea of a fixed number.
+A fixed number is similiar to a floating point numeber except it is represented to its fullest degree. 
+This is to mean that as such it represents all numbers it can possibly hold before of after the decimal.
+
+With this comes a notation that is used to represent all values that encompass a fixed number:
+
+   i= u
+x = Σ xi * 2^i
+   i= n+1
+   
+In which x represents the number that is to represented, u represents the upper bound of a number, n+1 represents a lower bound, and xi represents each term in the number.
+This idea is essential as it is fundamently the same concept when it comes to floating point.
+It is important to note the n+1 as apposed to simply n to represnt the smallest possible digit. 
+This is as one digit is usually left off in order to provide a number to round with.
+n is usually described as the most significant digit that we cannot represent.
+
+Moving on to the idea of floating point two new ideas are introduced that are not present in previous fixed point. 
+This is the idea of scientific notation as well as precision(bits) that play a role in how a floating point number can be represented.
+As such the notation reflects this:
+
+       p-1
+x = 2^e Σ xi * 2^(-i+e)
+      i= 0
+      
+In which p represents precision.
+Within this it is important to note the addition of a "2^e" this represnts the idea of an exponent allowing for a seemingly infinte number of representations of a 
+number - two things to note are the 2 is present as opposed to the familiar 10 in scientific notation as we are working in binary. 
+Additionally since their are infinate amount of represnetations, floating points have been noramlized in which the first "1" digit must be the only number 
+before the decimal point (IEEE representationm - refrenced later).
+
+All this is to represent the idea of how floating point numbers are fundamentaly similiar to the numbers we are familiar with, but 
+require modifications to allow for them to be representable by computers.
+Through computer limitations the idea of scientific notation is essential to store large as well as small numbers to make operations easier. 
+But due to the precision brought up by this idea, the issue of floating point error will be bbrought up.
