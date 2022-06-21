@@ -1,6 +1,7 @@
 #from itertools import combinations
 ## Case 1
 
+'''
 def AND(a, b):
   if (a and b):
     return True
@@ -24,10 +25,37 @@ def NOT(a):
     return False
   else:
     return True
+'''
 
   
-def Case1_output (x, y, z):
-  return OR((AND(x, y)),(AND((XOR(y, z)),(z))))
+def Case1_output(x, y, z):
+    ''' returns True if the operation is non-associative'''
+    # return OR((AND(x, y)),(AND((XOR(y, z)),(z))))
+    # return ((x & y) | ((y ^ z) & z))
+    # return ((x & y) | (~y & z))
+    return (x and y) or (not y and z)
+
+    '''          y^z  & z
+    yz = 00       0
+    yz = 01       1 -> 1
+    yz = 10       1 -> 0
+    yz = 11       0
+    '''
+
+
+def Case2_output(x, y, z, w):
+    ''' returns True if the operation is non-associative'''
+    return (not z and not y) or (x and not w) or (y and not w) or (w and not x)
+
+
+def Case3_output(x,y,z,a,b):
+    ''' returns True if the operation is non-associative'''
+    return -(y | z) + a == -(x | y) + b
+
+
+def Case4_output():
+    # ...
+    return
 
 
 #test1  = [[],[],[]]
@@ -38,14 +66,25 @@ def Case1_output (x, y, z):
 
 import itertools
 
-bools = [True,False]
+bools = [0, 1]
+
 result = itertools.product(bools, repeat=3)
-
 for i in result:
-  print(i)
-  print(Case1_output(i[0],i[1],i[2]))
+    print("case 1", i, int(Case1_output(*i)))
+print()
 
+result = itertools.product(bools, repeat=4)
+for i in result:
+    print("case 2", i, int(Case2_output(*i)))
+print()
 
+result = itertools.product(bools, repeat=5)
+for i in result:
+    print("case 3", i, int(Case3_output(*i)))
+    # only print the successful ones
+    # if Case3_output(*i):
+        # print("case 3", i, int(Case3_output(*i)))
+print()
 
 
 
