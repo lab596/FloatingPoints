@@ -1,38 +1,5 @@
-#from itertools import combinations
-## Case 1
-
-'''
-def AND(a, b):
-  if (a and b):
-    return True
-  else:
-    return False
-
-def OR(a, b):
-  if (a or b):
-    return True
-  else:
-    return False
-  
-def XOR(a, b):
-  if(((a==True) and (b==False)) or ((a==False) and (b==True))):
-    return True
-  else:
-    return False
-
-def NOT(a):
-  if a:
-    return False
-  else:
-    return True
-'''
-
-  
 def Case1_output(x, y, z):
-    ''' returns True if the operation is non-associative'''
-    # return OR((AND(x, y)),(AND((XOR(y, z)),(z))))
-    # return ((x & y) | ((y ^ z) & z))
-    # return ((x & y) | (~y & z))
+    #returns True if the operation is non-associative
     return (x and y) or (not y and z)
 
     '''          y^z  & z
@@ -49,20 +16,19 @@ def Case2_output(x, y, z, w):
 
 
 def Case3_output(x,y,z,a,b):
-    ''' returns True if the operation is non-associative'''
-    return -(y | z) + a == -(x | y) + b
+    #returns True if the operation is non-associatives
+    return -(y | z) + a != -(x | y) + b
+#A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
 
 
-def Case4_output():
-    # ...
-    return
 
-
-#test1  = [[],[],[]]
-
-
-#test1 = [[False,False,False],[False, False, True],[False, True, False],[True,False,False],[False, True, True],[True, False, True],[True, True, False],[True, True, True]]
-
+def Case4_output(x, y, z, a, w, b):
+    if(not((y or z)) and a):
+      print(y,z,a)
+      return 2
+    else:
+      return 
+#y = A'DE'F + ADE'F' + ADEF + A'CD'E'F' + A'CD'EF + A'BD'E'F' + A'BD'EF + ACD'EF' + ABD'EF' + A'B'C'E'F + AB'C'E'F' + AB'C'EF
 
 import itertools
 
@@ -81,14 +47,19 @@ print()
 result = itertools.product(bools, repeat=5)
 for i in result:
     print("case 3", i, int(Case3_output(*i)))
-    # only print the successful ones
-    # if Case3_output(*i):
-        # print("case 3", i, int(Case3_output(*i)))
+print()
+
+result = itertools.product(bools, repeat=6)
+for i in result:
+    testcase = int(Case4_output(*i))
+    if testcase<2:
+      print("case 4", i, int(Case4_output(*i)))
 print()
 
 
-
-#for i in test1:
-#  print(Case1_output(i[0],i[1],i[2]))
-
-#print(combinations([0,1], 3))
+#Case 4
+#y = A'DE'F + ADE'F' + ADEF + A'CD'E'F' + A'CD'EF + A'BD'E'F' + A'BD'EF + ACD'EF' + ABD'EF' + A'B'C'E'F + AB'C'E'F' + AB'C'EF
+#Simplified: ADEF+ABCEF
+#Case 3
+#A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
+#Simplified: ADE + CDE + BDE + ABCD + ABCE
