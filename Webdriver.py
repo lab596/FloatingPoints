@@ -1,9 +1,15 @@
 import webbrowser
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
 
-url='http://www.32x8.com/var6.html'
 
-chrome_path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
-webbrowser.register('chrome',None, webbrowser.BackgroundBrowser(chrome_path))
 
-webbrowser.get('chrome').open_new_tab(url)
-print("done")
+path="C:\chromedriver_win32 (1)\chromedriver.exe"
+driver = webdriver.Chrome(path)
+
+driver.get('http://www.32x8.com/var6.html')
+
+
