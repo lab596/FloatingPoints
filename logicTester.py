@@ -1,6 +1,8 @@
-def Case1_output(x, y, z):
+def Case1_check(x, y, z):
     #returns True if the operation is non-associative
-    return (x and y) or (not y and z)
+    #return (x and y) or (not y and z)
+    return ((not y) & z | (x & y)) 
+    #y = B'C + AB
 
     '''          y^z  & z
     yz = 00       0
@@ -9,6 +11,9 @@ def Case1_output(x, y, z):
     yz = 11       0
     '''
 
+def Case1_output(x, y, z):
+    #returns True if the operation is non-associative
+    return -x - (y | z) !=  -(y | x)
 
 def Case2_output(x, y, z, w):
     ''' returns True if the operation is non-associative'''
@@ -19,24 +24,43 @@ def Case3_output(x,y,z,a,b):
     #returns True if the operation is non-associatives
     return -(y | z) + a != -(x | y) + b
 #A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
+  
+def Case3_check(A,B,C,D,E):
+    #returns True if the operation is non-associatives
+    return ((not A) and (not D and E)) or ((not C) and D and (not E)) or (C and (not D) and E) or (B and (not D) and E) or (B and D and (not E)) or (A and D and (not E)) or ((not A) and (not B) and C and (not D)) or (not A) and (not B) and C and E or A and (not B) and (not C) and (not E) or (not B) and (not C) and D
+#y = A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
 
 
-
-def Case4_output(x, y, z, a, w, b):
+def Case4_output(x,y,z,a,w,b):
     if(not((y or z)) and a):
-      print(y,z,a)
+      print(str(2))
       return 2
     else:
-      return 
+      return -x - (y | z) + a != -1 - w + b
 #y = A'DE'F + ADE'F' + ADEF + A'CD'E'F' + A'CD'EF + A'BD'E'F' + A'BD'EF + ACD'EF' + ABD'EF' + A'B'C'E'F + AB'C'E'F' + AB'C'EF
+      #Simplified: ADEF+ABCEF
+
+#simplified: AEF+ADF+ADE+DEF+ABCF+ABCE+BCEF
+
+def Case4_check(x,y,z,a,w,b):
+  return (x and w and b) or (x and a and b) or (x and a and w) or (a and w and b) or (x and y and z and b) or (x and y and z and w) or (y and z and w and b)
 
 import itertools
 
 bools = [0, 1]
 
+arr1 = []
 result = itertools.product(bools, repeat=3)
 for i in result:
-    print("case 1", i, int(Case1_output(*i)))
+    print("case 1", i, int(Case1_check(*i)))
+    arr1.append(int(Case1_check(*i)))
+print()
+print("arr1: "+ str(arr1))
+
+
+result = itertools.product(bools, repeat=3)
+for i in result:
+    print("case 1 Logic:", i, int(Case1_output(*i)))
 print()
 
 result = itertools.product(bools, repeat=4)
@@ -44,22 +68,86 @@ for i in result:
     print("case 2", i, int(Case2_output(*i)))
 print()
 
+arr3 = []
 result = itertools.product(bools, repeat=5)
 for i in result:
     print("case 3", i, int(Case3_output(*i)))
+    arr3.append(int(Case3_output(*i)))
 print()
+print("arr3: "+ str(arr3))
+
+result = itertools.product(bools, repeat=5)
+for i in result:
+    print("case 3 check", i, int(Case3_check(*i)))
+print()
+
 
 result = itertools.product(bools, repeat=6)
 for i in result:
-    testcase = int(Case4_output(*i))
-    if testcase<2:
-      print("case 4", i, int(Case4_output(*i)))
+    print("case 4 check", i, int(Case4_check(*i)))
 print()
+
+arr4  = []
+result = itertools.product(bools, repeat=6)
+for i in result:
+    testcase = Case4_output(*i)
+    if testcase<2:
+      print("case 4", str(i), int(Case4_output(*i)))
+      arr4.append(int(Case4_output(*i)))
+print()
+print("arr4: "+ str(arr4))
+
+
 
 
 #Case 4
 #y = A'DE'F + ADE'F' + ADEF + A'CD'E'F' + A'CD'EF + A'BD'E'F' + A'BD'EF + ACD'EF' + ABD'EF' + A'B'C'E'F + AB'C'E'F' + AB'C'EF
+#y = A'EF' + A'DF' + A'DE + DEF' + AE'F + CD'E'F + BD'E'F + ACD'E' + ACD'F + ABD'E' + ABD'F + A'B'C'F' + A'B'C'E + B'C'EF'
+#simplified: AEF+ADF+ADE+DEF+ABCF+ABCE+BCEF
+
 #Simplified: ADEF+ABCEF
 #Case 3
 #A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
 #Simplified: ADE + CDE + BDE + ABCD + ABCE
+
+
+'''
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.chrome.service import Service
+
+
+
+    
+path=Service("C:\chromedriver_win32 (1)\chromedriver.exe")
+driver = webdriver.Chrome(service=path)
+
+driver.get('http://www.32x8.com/var6.html')
+
+arr4 = [1, 0, 1, 1, 2, 2, 2, 2, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 2, 2, 2, 2, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0]
+
+count = 0
+num = 3
+
+
+for i in range(64):
+    row = driver.find_element(By.XPATH,"/html/body/form/table/tbody/tr["+str(num)+"]/td[9]/input")
+    if arr4[i] == 1:
+        row.click()
+    if arr4[i] == 2:
+        x = driver.find_element(By.XPATH,"/html/body/form/table/tbody/tr["+str(num)+"]/td[10]/input")
+        x.click()
+    num+=1
+    count+=1
+
+sub = driver.find_element(By.XPATH,"/html/body/form/table/tbody/tr[67]/td/input")
+sub.click()
+'''
+
+
+#website case 1: y = B'C + AB
+
+
+
