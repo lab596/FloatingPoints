@@ -45,6 +45,9 @@ def Case4_output(x,y,z,a,w,b):
 def Case4_check(x,y,z,a,w,b):
   return (x and w and b) or (x and a and b) or (x and a and w) or (a and w and b) or (x and y and z and b) or (x and y and z and w) or (y and z and w and b)
 
+def Case5_output(b2,gamma,sigma,a2p,a3,beta):
+  return -b2 + gamma - sigma - (a2p or a3) != -(sigma or a2p or b2) + beta
+
 import itertools
 
 bools = [0, 1]
@@ -96,6 +99,14 @@ for i in result:
       arr4.append(int(Case4_output(*i)))
 print()
 print("arr4: "+ str(arr4))
+
+arr5  = []
+result = itertools.product(bools, repeat=6)
+for i in result:
+    print("case 5 ", i, int(Case5_output(*i)))
+    arr5.append(int(Case5_output(*i)))
+print()
+print("arr5: "+ str(arr5))
 
 
 
@@ -150,4 +161,62 @@ sub.click()
 #website case 1: y = B'C + AB
 
 
+###########################################
 
+
+def convert_string_to_boolean(arr, string):
+  
+  ## assigns letter to each varible (shown as parameter in end function)
+  letterCorrespondant = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+  variables = {}
+  type(variables)
+  for i in range(len(arr)):
+    variables[letterCorrespondant[i]] = arr[i]
+
+  ## splits string
+  brokenString = string.split("+")
+  newString    = []
+  finalOr      = []
+  finalBool    = 0
+
+  ## splits each AND statement into an array of letters, e.g. ["A", "B", "'"] <- ["AB'"]
+  for i in brokenString:
+    arr = []
+    for j in i:
+      arr.append(j)
+    newString.append(arr)
+
+
+  for i in newString:
+    a = 1
+    for j in range(len(i)):
+      if (j+2) <= len(i):
+        if i[j] != "'" and i[j+1] != "'":
+          a = a and variables[i[j]]
+        elif i[j] != "'" and i[j+1] == "'":
+          a = a and not variables[i[j]]
+      
+    a = a and (variables[i[len(i)-1]])
+    finalOr.append(a)
+
+  for i in finalOr:
+    finalBool = finalBool or i
+
+  return finalBool
+
+#example run
+
+A = 1
+B = 1
+C = 1
+
+array = (A, B, C)
+
+print(convert_string_to_boolean(array, "ABC+A'BC"))
+
+
+#Case 5: y = A'E + A'C'D + C'DE + A'BC + BCE + AC'D'E' + AB'CE'
+
+
+
+#y = B'F + B'D'E + D'EF + B'CD + CDF + AB'D + ADF + AB'C + ACF + ACE + ACD + A'BD'E'F' + BC'D'E'F' + A'BC'DF'
