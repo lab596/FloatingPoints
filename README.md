@@ -8,17 +8,17 @@ I hope to understand the margin of error and intend in finding a method to fix t
 I hope to conduct sufficient research in order to understand this topic and see where the problem lies. 
 Through this I hope to conduct experiments that help me realize and understand the issues taking place.
 
----
+
 Topics 
 ---
-**The Fraction Problem:**
+**Initial Observations:**
 
-fractions.py:  https://github.com/lab596/FloatingPoints/blob/main/fractions.py
+These are the initial observations - an initial experiment conducted.
 
-fractions.java:  https://github.com/lab596/FloatingPoints/blob/main/fractions.java
+[fractions.py](https://github.com/lab596/FloatingPoints/blob/main/initialobservations/experiment.java)
 
-observations.txt:  https://github.com/lab596/FloatingPoints/blob/main/observations.txt
+[fractions.java](https://github.com/lab596/FloatingPoints/blob/main/initialobservations/experiment.py)
 
-# Solution
+[observations.txt](https://github.com/lab596/FloatingPoints/blob/main/initialobservations/observations.txt)
 
-/* to be implemented */
+
