@@ -121,6 +121,7 @@ print("arr5: "+ str(arr5))
 #A'D'E + C'DE' + CD'E + BD'E + BDE' + ADE' + A'B'CD' + A'B'CE + AB'C'E' + AB'C'D
 #Simplified: ADE + CDE + BDE + ABCD + ABCE
 
+#Case 5 - y = B'F + B'D'E + D'EF + B'CD + CDF + AB'D + ADF + AB'C + ACF + ACE + ACD + A'BD'E'F' + BC'D'E'F' + A'BC'DF'
 
 '''
 from selenium import webdriver
@@ -174,7 +175,7 @@ def convert_string_to_boolean(arr, string):
     variables[letterCorrespondant[i]] = arr[i]
 
   ## splits string
-  brokenString = string.split("+")
+  brokenString = string.split(" + ")
   newString    = []
   finalOr      = []
   finalBool    = 0
@@ -195,14 +196,15 @@ def convert_string_to_boolean(arr, string):
           a = a and variables[i[j]]
         elif i[j] != "'" and i[j+1] == "'":
           a = a and not variables[i[j]]
-      
-    a = a and (variables[i[len(i)-1]])
-    finalOr.append(a)
+
+    if (i[len(i)-1]) != "'":  
+      a = a and (variables[i[len(i)-1]])
+      finalOr.append(a)
 
   for i in finalOr:
     finalBool = finalBool or i
 
-  return finalBool
+  return int(finalBool)
 
 #example run
 
@@ -212,11 +214,28 @@ C = 1
 
 array = (A, B, C)
 
-print(convert_string_to_boolean(array, "ABC+A'BC"))
+print(convert_string_to_boolean(array, "ABC'+AB'C'"))
 
 
-#Case 5: y = A'E + A'C'D + C'DE + A'BC + BCE + AC'D'E' + AB'CE'
+arr5c = []
+
+def Case5_check(A, B, C, D, E, F):
+    #returns True if the operation is non-associative
+    #return (x and y) or (not y and z)
+    return convert_string_to_boolean([A, B, C, D, E, F], "B'F + B'D'E + D'EF + B'CD + CDF + AB'D + ADF + AB'C + ACF + ACE + ACD + A'BD'E'F' + BC'D'E'F' + A'BC'DF'")
+
+result = itertools.product(bools, repeat=6)
+for i in result:
+    print("case 5 check:", i, int(Case5_check(*i)))
+    arr5c.append(int(Case5_output(*i)))
+print()
+print("arr5c: " + str(arr5c))
 
 
+def arrayOb(arr1, arr2):
+  for i in range(len(arr1)):
+    if(arr1[i] != arr2[i]):
+      print("Not equal.")
+  print("Equal.")
 
-#y = B'F + B'D'E + D'EF + B'CD + CDF + AB'D + ADF + AB'C + ACF + ACE + ACD + A'BD'E'F' + BC'D'E'F' + A'BC'DF'
+arrayOb(arr5, arr5c)
