@@ -50,6 +50,34 @@ def Case5_output(b2,gamma,sigma,a2p,a3,beta):
 
 import itertools
 
+
+
+def Case6_output(b2,a2p,a3,gamma,sigma,V, delta):
+  return -b2 - (a2p or a3) + gamma - sigma != -1 -V + delta
+
+
+def Case7_output(b2,sigma,gamma,a2p,a3,theta, beta, beta2):
+  return -b2 - ((not gamma) & sigma) + ((sigma^gamma)^(a2p or a3)) != (sigma or a2p or a3) + beta + beta2
+
+def Case7_check(b2,sigma,gamma,a2p,a3,theta, beta, beta2):
+  return (b2 or sigma or gamma or a2p or a3 or theta or beta or beta2) or ((b2 or sigma or gamma) or not(a2p or a3 or theta) or beta or beta2) or (b2 or sigma or not(gamma) or a2p or a3 or not(beta^beta2)) or ((b2 or not(sigma) or not(gamma)) or not(a2p or a3) or beta or beta2) or (not(b2) or sigma or not(gamma) or a2p or a3 or beta or beta2)
+
+
+def Case8_output(b2,sigma,gamma,a2p,a3,theta, beta, beta2, V):
+  return -b2 - ((not gamma) & sigma) + ((sigma^gamma)^(a2p or a3)) != -1 - V + beta + beta2
+
+
+
+
+
+
+import itertools
+
+
+
+
+
+
 bools = [0, 1]
 
 arr1 = []
@@ -107,6 +135,57 @@ for i in result:
     arr5.append(int(Case5_output(*i)))
 print()
 print("arr5: "+ str(arr5))
+
+arr6  = []
+result = itertools.product(bools, repeat=7)
+for i in result:
+    print("CASE 6 ", i, int(Case6_output(*i)))
+    arr6.append(int(Case6_output(*i)))
+print()
+print("ARR6: "+ str(arr6))
+
+
+
+arr7  = []
+result = itertools.product(bools, repeat=8)
+for i in result:
+  if int(Case7_output(*i)) == 0:
+    print("CASE 7 ", i, int(Case7_output(*i)))
+    arr7.append(int(Case7_output(*i)))
+print()
+print("ARR7: "+ str(arr7))
+
+
+arr7c  = []
+result = itertools.product(bools, repeat=8)
+for i in result:
+  if int(Case7_check(*i)) == 0:
+    print("CASE 7 ", i, int(Case7_check(*i)))
+    arr7c.append(int(Case7_ch(*i)))
+print()
+print("ARR7: "+ str(arr7))
+
+
+arr8  = []
+log8  = []
+result = itertools.product(bools, repeat=9)
+count0 = 0
+count1 = 0
+for i in result:
+  if int(Case8_output(*i)) == 0:
+    print("CASE 8 ", i, int(Case8_output(*i)))
+    if int(Case8_output(*i)) == 0:
+      count0 +=1
+    else:
+      count1 +=1
+    arr8.append(int(Case8_output(*i)))
+    if int(Case8_output(*i)) == 1:
+      log8.append(i)
+print()
+print("ARR8: "+ str(arr8))
+print("count0: " + str(count0))
+print("count1: "+ str(count1))
+
 
 
 
@@ -235,7 +314,7 @@ print("arr5c: " + str(arr5c))
 def arrayOb(arr1, arr2):
   for i in range(len(arr1)):
     if(arr1[i] != arr2[i]):
-      print("Not equal.")
+      print(str(i) + "Not equal.")
   print("Equal.")
 
 arrayOb(arr5, arr5c)
