@@ -7,5 +7,12 @@ During 2022 Avi Darbari as well as I (Rohan Udupa) worked on the case that inclu
 # Previous Work
 
 
+# The Code
 
+Intial Code
+---
+So what is the point of this code exactly? Well, through the internship we were tasked with verifying our logic statements. To do this we had to make truth tables and often times these would become huge and immpossible to do by hand without human mistakes. Thats when we used the code to develop all the possibile rows of a truth table depending on how many varibales it had. From there we were able to test the logic statements we derived by running it through the table to see if we got the expected results.  
 
+Logic Statements
+---
+We eventually got to a point where the logic statements were just getting more and more complicated as the number of variables were increasing. This lead to the use of a logic statement website ([http://www.32x8.com/var6.html])
